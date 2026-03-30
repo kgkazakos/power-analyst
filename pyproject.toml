@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "power-analyst"
+version = "0.1.0"
+description = "Statistical power analysis for t-tests, proportions, ANOVA, and correlations — with plain-language interpretation"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Kostas Kazakos" }]
+keywords = ["power-analysis", "sample-size", "statistics", "ux-research", "cli"]
+dependencies = ["click>=8.0", "numpy>=1.24", "scipy>=1.10", "rich>=13.0"]
+
+[project.optional-dependencies]
+openai = ["openai>=1.0"]
+anthropic = ["anthropic>=0.20"]
+gemini = ["google-generativeai>=0.5"]
+all = ["openai>=1.0", "anthropic>=0.20", "google-generativeai>=0.5"]
+dev = ["pytest>=7.0", "ruff>=0.4"]
+
+[project.scripts]
+power-analyst = "power_analyst.cli:cli"
+
+[project.urls]
+Repository = "https://github.com/kgkazakos/power-analyst"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["power_analyst*"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
